@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:panel id="pnlPrincipal">
+            <h:form id="frmPrincipal">
+                <p:panelGrid id="pnlgrd1" columns="2">
+                    <p:inputText id="txtingresoBusqueda" value="#{consultaFormBean.tituloBuscado}"/>
+                    <p:commandButton id="btnBusqueda" value="RealizarBusqueda" actionListener="#{consultaFormBean.busquedaTitulo()}" update="dlgBuscar" oncomplete="PF('dlgBuscar').show()"/>
+                </p:panelGrid>
+                
+                <p:separator/>
+                <p:dataTable id="tblLista" value="#{consultaFormBean.gestor.listaLibros}" var="libros">
+                    <p:column headerText="ISBN">
+                        <p:outputLabel id="lblISBN" value="#{libros.ISBN}"/>
+                    </p:column>
+                    <p:column headerText="Titulo" >
+                        <p:outputLabel id="lblTitulo" value="#{libros.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <p:column headerText="Nombre">
+                            <p:outputLabel id="lblNombre" value="#{libros.autor.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Apellido">
+                            <p:outputLabel id="lblApellido" value="#{libros.autor.apellido}"/>
+                        </p:column>
+                    </p:column>
+                    <p:column headerText="Fecha Autor">
+                        <p:outputLabel id="lblFecha" value="#{libros.fechaEdicion}"/>
+                    </p:column>
+                </p:dataTable>
+                <p:dialog id="dlgBuscar" header="Busqueda" modal="true" widgetVar="dlgBuscar" minWidth="1000">
+                        <h:form id="frmBuscar">
+                            <p:panelGrid id="pnlprueba" columns="2">
+                                <p:outputLabel id="lblmuestrabusqISBN" value="ISBN Buscado"/>
+                                <p:outputLabel id="lblfueraISBN" value="#{consultaFormBean.libroBuscado.ISBN}"/>
+                                <p:outputLabel id="lblmuestrabusqtitulo" value="titulo Buscado"/>
+                                <p:outputLabel id="lblfueratitulo" value="#{consultaFormBean.libroBuscado.titulo}"/>
+                                <p:outputLabel id="lblmuestrabusqautor" value="Nombre del autor Buscado"/>
+                                <p:outputLabel id="lblfueranombreautor" value="#{consultaFormBean.libroBuscado.autor.apellido}"/>
+                                <p:outputLabel id="lblmuestraapellido" value="Apellido del autor Buscado"/>
+                                <p:outputLabel id="lblfueraapellidoautor" value="#{consultaFormBean.libroBuscado.autor.nombre}"/>
+                                <p:outputLabel id="lblmuestrabusqprecio" value="precio Buscado"/>
+                                <p:outputLabel id="lblfueradialog" value="#{consultaFormBean.libroBuscado.fechaEdicion}"/>
+                            </p:panelGrid>
+                        </h:form>
+                </p:dialog>
+                <p:commandButton value="Volver al Menu" action="Menu"/>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+
